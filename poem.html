@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗歌详情</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .poem-detail {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 3rem;
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poem-detail::before {
+            content: '"';
+            position: absolute;
+            top: -40px;
+            right: 30px;
+            font-size: 200px;
+            color: rgba(0,0,0,0.03);
+            font-family: serif;
+        }
+        
+        .poem-detail h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+        
+        .poem-detail .author {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+        
+        .poem-detail .content {
+            font-size: 1.4rem;
+            line-height: 2;
+            white-space: pre-wrap;
+            color: var(--text-primary);
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(225, 112, 85, 0.4);
+        }
+        
+        .back-button::before {
+            content: '←';
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .poem-detail {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .poem-detail h2 {
+                font-size: 2rem;
+            }
+            
+            .poem-detail .content {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Animation */
+        .poem-detail {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poem-detail" id="poemDetail">
+        <a href="index.html" class="back-button">返回首页</a>
+        <!-- Poem details will be inserted here by JavaScript -->
+    </div>
+
+    <script src="poems.js"></script>
+    <script>
+        // Get poem ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const poemId = parseInt(urlParams.get('id'));
+        
+        // Find the poem
+        const poem = poems.find(p => p.id === poemId);
+        
+        // Display poem details
+        if (poem) {
+            document.title = `${poem.title} - 唐诗集`;
+            const poemDetail = document.getElementById('poemDetail');
+            poemDetail.innerHTML += `
+                <h2>${poem.title}</h2>
+                <p class="author">${poem.dynasty} · ${poem.author}</p>
+                <p class="content">${poem.content}</p>
+            `;
+        } else {
+            document.getElementById('poemDetail').innerHTML += '<p>未找到诗歌</p>';
+        }
+    </script>
+</body>
+</html> 

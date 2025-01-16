@@ -1,0 +1,195 @@
+:root {
+    --primary-color: #2d3436;
+    --accent-color: #e17055;
+    --background-color: #f9f9f9;
+    --card-background: #ffffff;
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+    --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.1);
+    --shadow-hover: 0 20px 40px -20px rgba(0,0,0,0.2);
+    --gradient: linear-gradient(135deg, #e17055, #fab1a0);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+}
+
+header {
+    background: var(--gradient);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NiIgaGVpZ2h0PSIxMDAiPgo8cGF0aCBkPSJNMjggNjZMMCA1MEwwIDE2TDI4IDBMNTYgMTZMNTYgNTBMMjggNjZMMjggMTAwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+CjxwYXRoIGQ9Ik0yOCAwTDI4IDM0TDAgNTBMMCA4NEwyOCAxMDBMNTYgODRMNTYgNTBMMjggMzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+') repeat;
+    opacity: 0.1;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+nav {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+nav input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: var(--shadow-soft);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+nav input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.poetry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.poetry-card {
+    background: var(--card-background);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.poetry-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 120px;
+    color: rgba(0,0,0,0.03);
+    font-family: serif;
+}
+
+.poetry-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.poetry-card h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.poetry-card .author {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.poetry-card .content {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    background: white;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.poetry-card {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.poetry-card:nth-child(1) { animation-delay: 0.1s; }
+.poetry-card:nth-child(2) { animation-delay: 0.2s; }
+.poetry-card:nth-child(3) { animation-delay: 0.3s; }
+.poetry-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .poetry-grid {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+    }
+    
+    .poetry-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --card-background: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #a0a0a0;
+        --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.3);
+        --shadow-hover: 0 20px 40px -20px rgba(0,0,0,0.4);
+    }
+    
+    nav input {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+    
+    .poetry-card::before {
+        color: rgba(255,255,255,0.03);
+    }
+} 
